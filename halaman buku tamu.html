@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Buku Tamu</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    .form-container {
+      width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    button {
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Form Buku Tamu</h2>
+
+    <label for="nama">Nama Lengkap:</label>
+    <input type="text" id="nama" name="nama" required>
+
+    <label for="jenis-kelamin">Jenis Kelamin:</label>
+    <input type="radio" id="laki-laki" name="jenis-kelamin" value="laki-laki">
+    <label for="laki-laki">Laki-laki</label>
+    <input type="radio" id="perempuan" name="jenis-kelamin" value="perempuan">
+    <label for="perempuan">Perempuan</label>
+
+    <label for="alamat">Alamat Tinggal:</label>
+    <textarea id="alamat" name="alamat" required></textarea>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label>Aktif Pada Sosial Media:</label>
+    <input type="checkbox" id="facebook" name="media" value="facebook">
+    <label for="facebook">Facebook</label>
+    <input type="checkbox" id="twitter" name="media" value="twitter">
+    <label for="twitter">Twitter</label>
+    <input type="checkbox" id="instagram" name="media" value="instagram">
+    <label for="instagram">Instagram</label>
+    <input type="checkbox" id="path" name="media" value="path">
+    <label for="path">Path</label>
+
+    <label for="web">Mengetahui Web Ini dari:</label>
+    <select id="web" name="web">
+      <option value="">-= Pilih =-</option>
+      <option value="google">Google</option>
+      <option value="facebook">Facebook</option>
+      <option value="lainnya">Lainnya</option>
+    </select>
+
+    <label for="pesan">Pesan:</label>
+    <textarea id="pesan" name="pesan"></textarea>
+
+    <button type="submit">Kirim</button>
+    <button type="reset">Batal</button>
+
+     <a href="about.html">about me</a>
+  </div>
+
+</body>
+</html>
