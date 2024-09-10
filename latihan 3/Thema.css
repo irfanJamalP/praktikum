@@ -1,0 +1,13 @@
+p{
+    text-align: center;
+    color: red;
+
+}
+#para1{
+    text-align: right;
+    color: green;
+}
+.para2{
+    text-align: left;
+    color: blue;
+}
