@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    <style>
+        /* Menghilangkan scrollbar horizontal untuk mencegah konten yang meluap secara horizontal */
+        body {
+            overflow-x: hidden;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Mengatur margin dan padding default elemen menjadi 0, menerapkan box-sizing untuk menjaga ukuran elemen */
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Mengatur lebar section untuk 100% lebar layar dan tingginya 100% dari viewport (height: 100vh) */
+        section {
+            width: 100%;
+            height: 100vh;
+        }
+        
+        /* Mengatur navigasi agar posisinya fixed di bagian atas dan memberikan shadow */
+        section nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            right: 0;
+            left: 0;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000; /* Agar elemen nav berada di atas elemen lain */
+        }
+        
+        /* Menentukan ukuran logo pada navigasi */
+        section nav .logo img {
+            width: 50px;
+            cursor: pointer;
+            margin: 7px 0;
+        }
+        
+        /* Mengatur daftar navigasi menjadi inline tanpa bullet points */
+        section nav ul {
+            list-style: none;
+        }
+        
+        /* Menampilkan setiap item menu navigasi secara inline dan memberikan jarak antar elemen */
+        section nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        
+        /* Styling untuk link dalam navigasi, dengan efek hover */
+        section nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            font-size: 17px;
+            transition: 0.1s; /* Transisi saat hover */
+        }
+        
+        /* Memberikan garis bawah saat hover pada link navigasi */
+        section nav ul li a::after {
+            content: '';
+            width: 0;
+            height: 2px;
+            background: #fac031;
+            display: block;
+            transition: 0.2s linear;
+        }
+        
+        /* Mengatur panjang garis bawah link menjadi penuh saat hover */
+        section nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Mengubah warna teks link navigasi saat hover */
+        section nav ul li a:hover {
+            color: #fac031;
+        }
+        
+        /* Styling untuk ikon di bagian kanan navigasi (misalnya ikon media sosial) */
+        section nav .icon i {
+            font-size: 18px;
+            color: #000;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        /* Mengubah warna ikon saat dihover */
+        section nav .icon i:hover {
+            color: #fac031;
+        }
+        
+        /* Styling untuk bagian utama halaman yang menampilkan konten */
+        section .main {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            top: 130px; /* Jarak dari atas untuk menyesuaikan dengan navigasi fixed */
+        }
+        
+        /* Styling untuk teks besar di halaman utama (judul) */
+        section .main .men_text h1 {
+            font-size: 50px;
+            position: relative;
+            top: -90px;
+            left: 20px;
+ }
+        
+        /* Menambahkan styling untuk bagian teks khusus pada judul (dengan font mv boli) */
+        section .main .men_text h1 span {
+            margin-left: 15px;
+            color: #fac031;
+            font-family: mv boli;
+            line-height: 22px;
+            font-size: 50px;
+        }
+        
+        /* Mengatur lebar maksimum untuk gambar utama di halaman */
+        section .main_image {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Menentukan ukuran gambar di halaman utama */
+        section .main_image img {
+            max-width: 80%;
+            height: auto;
+        }
+        
+        /* ABOUT PAGE STYLES */
+        
+        /* Mengatur ukuran dan padding untuk section about */
+        .about {
+            width: 100%;
+            height: 100vh;
+            padding: 70px 0;
+        }
+        
+        /* Menyusun elemen dalam about secara horizontal dan meratakan */
+        .about .about_main {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap; /* Untuk responsivitas */
+        }
+        
+        /* Menentukan ukuran dan tampilan gambar pada section about */
+        .about .about_main .image img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 50%; /* Membuat gambar bulat */
+            margin-left: 20px; /* Memberikan jarak dari sisi kiri */
+        }
+        
+        /* Styling untuk teks heading (judul) pada about section */
+        .about .about_main .about_text h1 {
+            font-size: 55px;
+            position: relative;
+            bottom: 50px;
+        }
+        
+        /* Mengubah warna teks khusus dalam judul (dengan font mv boli) */
+        .about .about_main .about_text h1 span {
+            color: #fac031;
+            margin-right: 15px;
+            font-family: mv boli;
+        }
+        
+        /* Styling untuk subjudul di about section */
+        .about .about_main .about_text h3 {
+            font-size: 30px;
+            margin: 0 0 50px 0;
+        }
+        
+        /* Menyusun paragraf teks pada about section */
+        .about .about_main .about_text p {
+            width: 650px;
+            text-align: justify;
+            margin-right: 30px;
+            line-height: 22px; /* Menambahkan spasi antarbaris */
+        }
+        
+        /* Styling untuk tombol di about section */
+        .about .about_btn {
+            background: #fac031;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: #fff;
+            position: relative;
+            left: 55%;
+            bottom: 30px;
+        }
+        
+        /* Styling untuk bagian foto pembuat website */
+        .creator_photo {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: #f9f9f9; /* Latar belakang ringan untuk membedakan */
+            border-radius: 10px; /* Membulatkan sudut bingkai */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan ringan */
+        }
+        
+        .creator_photo h3 {
+            font-size: 25px;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .creator_photo img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Membuat foto berbentuk lingkaran */
+            border: 4px solid #fac031; /* Memberikan bingkai dengan warna utama */
+            object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+        }
+        
+        /* MENU PAGE STYLES */
+        
+        /* Mengatur lebar dan padding untuk menu section */
+        .menu {
+            width: 80%;
+            padding: 70px 0;
+            margin: 0 auto; /* Agar konten rata di tengah */
+        }
+        
+        /* Styling untuk heading pada menu section */
+        .menu h1 {
+            font-size: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        /* Memberikan warna dan font khusus untuk bagian teks tertentu dalam heading */
+        .menu h1 span {
+            color: #fac031;
+            margin -left: 15px;
+            font-family: mv boli;
+        }
+        
+        /* Styling untuk container grid yang menyusun item menu */
+        .menu .menu_box {
+            width: 95%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsif */
+            grid-gap: 15px; /* Jarak antar elemen grid */
+            justify-content: center; /* Meratakan grid ke kiri dan kanan */
+        }
+        
+        /* Styling untuk setiap kartu menu */
+        .menu .menu_box .menu_card {
+            width: 100%;
+            padding-top: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan pada kartu */
+            background: #fff; /* Latar belakang putih */
+            border-radius: 10px; /* Membulatkan sudut */
+            overflow: hidden; /* Menghindari konten meluap */
+        }
+        
+        /* Menentukan ukuran dan tampilan gambar dalam kartu menu */
+        .menu .menu_box .menu_card .menu_image {
+            width: 100%;
+            height: 200px; /* Atur tinggi gambar */
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        /* Styling untuk gambar di dalam kartu menu */
+        .menu .menu_box .menu_card .menu_image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: 0.3s; /* Menambahkan transisi pada gambar */
+        }
+        
+        /* Styling untuk teks nama menu */
+        .menu .menu_box .menu_card .menu_info h2 {
+            width: 100%;
+            text-align: center;
+            margin: 10px auto;
+            font-size: 18px;
+            color: #fac031;
+        }
+        
+        /* Styling untuk deskripsi menu */
+        .menu .menu_box .menu_card .menu_info h3 {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        /* ORDER PAGE STYLES */
+        
+        /* Mengatur ukuran dan padding untuk order section */
+        .order {
+            width: 100%;
+            height: 100vh;
+            padding: 70px 0;
+            background-color: transparent;
+        }
+        
+        /* Styling untuk heading pada order section */
+        .order h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 55px;
+        }
+        
+        /* Memberikan warna dan font khusus untuk bagian teks tertentu dalam heading */
+        .order h1 span {
+            color: #fac031;
+            margin-right: 15px;
+            font-family: mv boli;
+        }
+        
+        /* Memberikan efek garis bawah pada teks dalam span */
+        .order h1 span::after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background: #fac031;
+            display: block;
+            position: relative;
+            bottom: 15px;
+        }
+        
+        /* Menyusun elemen utama pada order section secara horizontal */
+        .order .order_main {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap; /* Untuk responsivitas */
+        }
+        
+        /* Styling untuk gambar di order section */
+        .order .order_main .order_image img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Styling untuk form pemesanan di order section */
+        .order .order_main form {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Membagi form menjadi 2 kolom */
+            grid-gap: 15px 30px; /* Menambahkan jarak antara input */
+            width: 60%;
+            margin: 0 auto; /* Agar form rata di tengah */
+        }
+        
+        /* Styling untuk input dalam form */
+        .order .order_main form .input input {
+            width: 100%;
+            height: 35px;
+            padding: 0 10px;
+            border: 2px solid #cccccc;
+            background: #eeeeee;
+            outline: none;
+            border-radius: 3px;
+        }
+        
+        /* Mengubah warna border input saat fokus */
+        .order .order_main form .input input:focus {
+            border: 2px solid #fac031;
+        }
+        
+        /* Styling untuk tombol submit dalam form */
+        .order .order_main form .order_btn {
+            padding: 10px 0;
+            background: #fac031;
+            color: white;
+            width: 40%;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            border-radius: 5px; /* Membulatkan sudut tombol */
+            cursor: pointer; /* Mengubah kursor saat hover */
+            transition: background 0.3s; /* Transisi warna background */
+        }
+        
+        /* Mengubah warna tombol saat hover */
+        .order .order_main form .order_btn:hover {
+            background: #e0a800;
+        }
+        
+        /* FOOTER STYLES */
+        
+        /* Mengatur ukuran dan styling umum untuk footer */
+        footer {
+            width: 100%;
+            padding: 30px 0;
+            background: #eeeeee;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        /* Menyusun elemen footer dalam grid dengan 4 kolom */
+        footer .footer_main {
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-content: space-between;
+            align-items: start;
+        }
+        
+        /* Styling untuk tag footer */
+        footer .footer_tag {
+            text-align: left;
+        }
+        
+        /* Styling untuk heading dalam footer */
+        footer .footer_tag h2 {
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        /* Styling untuk paragraf dalam footer */
+        footer .footer_tag p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        
+        /* Styling untuk bagian akhir footer */
+        footer .end {
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            background: #dcdcdc;
+        }
+        
+        /* Mengatur warna teks akhir footer */
+        footer .end span {
+            color: #fac031;
+            margin-left: 10px;
+        }
+        
+        /* Tambahkan media query untuk responsivitas */
+        @media (max-width: 768px) {
+            .menu {
+                width: 90%;
+            }
+            .order .order_main form {
+                width: 80%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .menu {
+                width: 100%;
+            }
+            .order .order_main form {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="Home">
+        <nav>
+            <div class="logo">
+                <img src="logo1.jpg" alt="Logo Kedai Dapur Tengah">
+            </div>
+
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#Menu">Menu</a></li>
+                <li><a href="#Order">Order</a></li>
+            </ul>
+        </nav>
+
+        <div class="main">
+            <div class="men_text">
+                <h1>Welcome To<span>Kedai Dapur Tengah</span></h1>
+            </div>
+
+            <div class="main_image">
+                <img src="logo1.jpg" alt="Gambar Utama Kedai Dapur Tengah">
+            </div>
+        </div>
+    </section>
+
+    <!--About-->
+    <div class="about" id="About">
+        <div class="about_main">
+            <div class="image">
+                <img src="kedai.jpg" alt="Kedai Dapur Tengah">
+            </div>
+
+            <div class="about_text">
+                <h1><span>About</span>Us</h1>
+                <p>
+                    Selamat datang di kedai dapur Tengah, tempat di mana kelezatan makanan ringan bertemu dengan suasana hangat dan bersahabat. Kedai Dapur Tengah menawarkan pilihan camilan yang cocok untuk semua kalangan. dari jajanan manis yang menggugah selera, setiap produk kami dibuat dengan cinta dan perhatian terhadap detail.
+                    Terima kasih telah memilih kami sebagai tempat menikmati makanan ringan. Kami berharap dapat menyajikan kelezatan yang membuat Anda ingin kembali lagi!
+                </p>
+
+                <!-- Bagian Foto Pembuat Website -->
+                <div class="creator_photo">
+                    <h3>Meet the Creator</h3>
+                    <img src="rania.jpg" alt="Foto Pembuat Website">
+                    <img src="ica.jpg" alt="Foto Pembuat Website">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Menu-->
+    <div class="menu" id="Menu">
+        <h1>Our<span>Menu</span></h1>
+
+        <div class="menu_box">
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="kebab.jpg" alt="Kebab">
+                </div>
+                <div class="menu_info">
+                    <h2>Kebab</h2>
+                    <h3>Rp 8.000</h3>
+                </div>
+            </div> 
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="pentol goreng .jpg" alt="Pentol Goreng">
+                </div>
+                <div class="menu_info">
+                    <h2>Pentol Goreng</h2>
+                    <h3>Rp 5.000</h3>
+                </div>
+            </div> 
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="bakso goreng.jpg" alt="Bakso Goreng">
+                </div>
+                <div class="menu_info">
+                    <h2>Bakso Goreng</h2>
+                    <h3>Rp 8.000</h3>
+                </div>
+            </div> 
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="lumpia.jpg" alt="Lumpia Telur">
+                </div>
+                <div class="menu_info">
+                    <h2>Lumpia Telur</h2>
+                    <h3>Rp 8.000</h3>
+                </div>
+            </div> 
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="es teh.jpg" alt="Es Teh">
+                </div>
+                <div class="menu_info">
+                    <h2>Es Teh</h2>
+                    <h3>Rp 5.000</h3>
+                </div>
+            </div> 
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="good day.jpg" alt="Good Day">
+                </div>
+                <div class="menu_info">
+                    <h2>Good Day</h2>
+                    <h3>Rp 8.000</h3>
+                </div>
+            </div> 
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="pop ice.jpg" alt="Pop Ice">
+                </div>
+                <div class="menu_info">
+                    <h2>Pop Ice</h2>
+                    <h3>Rp 5.000</h3>
+                </div>
+            </div> 
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="es mojito.jpg" alt="Es Mojito">
+                </div>
+                <div class="menu_info">
+                    <h2>Es Mojito</h2>
+                    <h3>Rp 6.000</h3>
+                </div>
+            </div> 
+        </div> 
+    </div>
+
+    <!--Order-->
+    <div class="order" id="Order">
+        <h1><span>Order</span>Now</h1>
+
+        <div class="order_main">
+            <div class="order_image">
+                <!-- Kamu bisa menambahkan gambar atau ilustrasi di sini -->
+            </div>
+
+            <form action="select">
+                <div class="input">
+                    <p>Name</p>
+                    <input type="text" required>
+                </div>
+
+                <div class="input">
+                    <p>Email</p>
+                    <input type="email" required>
+                </div>
+
+                <div class="input">
+                    <p>Number</p>
+                    <input type="tel" required>
+                </div>
+
+                <div class="input">
+                    <p>How Much</p>
+                    <input type="number" required>
+                </div>
+
+                <div class="input">
+                    <p>You Order</p>
+                    <input type="text" required>
+                </div>
+
+                <div class="input">
+                    <p>Address</p>
+                    <input type="text" required>
+                </div>
+
+                <button type="submit" class="order_btn">Order Now </button>
+            </form>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <footer>
+        <div class="footer_main">
+            <div class="footer_tag">
+                <h2>Location</h2>
+                <p>BATEGULUNG, Gowa</p>
+            </div>
+            <div class="footer_tag">
+                <h2>Contact</h2>
+                <p>087785506470 (Rania)</p>
+                <p>081342376198 (Ica)</p>
+            </div>
+            <div class="footer_tag">
+                <h2>Our Services</h2>
+                <p>Open Everyday</p>
+                <p>09 AM - 10 PM</p>
+            </div>
+            <div class="footer_tag">
+                <h2>Follow Us</h2>
+                <p>@dapoer_tengah</p>
+            </div>
+        </div>
+        <div class="end">
+            <span>Design by </span><span style="color: orange;">Kedai Dapur Tengah</span>
+        </div>
+    </footer>
+
+    <script>
+        function showPopup() {
+            alert("Terima kasih!");
+        }
+    </script>
+</body>
+</html>
